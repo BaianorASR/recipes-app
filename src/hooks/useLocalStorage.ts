@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 // https://usehooks.com/useLocalStorage/
-
 import { useState } from 'react';
 
 export function useLocalStorage<T>(key: string, initialValue: T) {

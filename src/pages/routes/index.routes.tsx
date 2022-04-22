@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Login, Foods } from '..';
+
+import { Foods, Login } from '..';
+import { DrinksID } from '../Drinks/id';
+import { FoodsID } from '../Foods/id';
 
 export default function AppRouter() {
   return (
@@ -8,10 +11,10 @@ export default function AppRouter() {
         <Route path="/" element={<Login />} />
         <Route path="/foods" element={<Foods />} />
         <Route path="/drinks" element={<Foods />} />
-        <Route path="/foods/:id-da-receita" element={<Foods />} />
-        <Route path="/drinks/:id-da-receita" element={<Foods />} />
-        <Route path="/foods/:id-da-receita/in-progress" element={<Foods />} />
-        <Route path="/drinks/:id-da-receita/in-progress" element={<Foods />} />
+        <Route path="/foods/:id" element={<FoodsID />} />
+        <Route path="/drinks/:id" element={<DrinksID />} />
+        <Route path="/foods/:id/in-progress" element={<Foods />} />
+        <Route path="/drinks/:id/in-progress" element={<Foods />} />
         <Route path="/explore" element={<Foods />} />
         <Route path="/explore/foods" element={<Foods />} />
         <Route path="/explore/drinks" element={<Foods />} />

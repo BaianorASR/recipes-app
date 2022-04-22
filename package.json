@@ -63,5 +63,12 @@
       "clover",
       "html"
     ]
+  },
+  "importSort": {
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "eslint",
+      "options": {}
+    }
   }
 }

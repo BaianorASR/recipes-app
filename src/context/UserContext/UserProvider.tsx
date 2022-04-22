@@ -1,4 +1,5 @@
 import { FC, ReactNode, useContext, useState } from 'react';
+
 import UserContext from '.';
 
 type UserProviderProps = {

@@ -1,10 +1,11 @@
-/* eslint-disable security/detect-object-injection */
 import { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
 import { EXCLUDE, PATHS } from '../../constants/Header';
-import type { TPaths } from '../../constants/Header';
-import * as S from './styles';
 import { Search } from '../Search';
+import * as S from './styles';
+
+import type { TPaths } from '../../constants/Header';
 
 export const Header: FC = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
