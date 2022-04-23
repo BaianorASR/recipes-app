@@ -1,4 +1,4 @@
-import { TDrinks, TFoods } from '../../types/@types_api';
+import type { TResponseDrinks, TResponseFoods } from '../../types/@types_api';
 
 export type fetchApiResultsProps = {
   query: string;
@@ -6,8 +6,7 @@ export type fetchApiResultsProps = {
   path: '/foods' | '/drinks';
 };
 
-type TResponseFoods = { meals: TFoods[] };
-type TResponseDrinks = { drinks: TDrinks[] };
+export type TResponseCategories = Record<'meals' | 'drinks', { strCategory: string }>;
 
 export function fetchFoods({
   query,
@@ -39,12 +38,27 @@ export function fetchDrinks({
     .then((data: TResponseDrinks) => data);
 }
 
-export const InitFoods = (): Promise<TResponseFoods> =>
-  fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-    .then(res => res.json())
-    .then((data: TResponseFoods) => data);
+export const InitData = <T, C>(
+  path: '/foods' | '/drinks',
+): Promise<[Awaited<T>, Awaited<C>]> => {
+  const URLS = {
+    '/foods': {
+      res: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+      cat: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+    },
+    '/drinks': {
+      res: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      cat: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+    },
+  };
 
-export const InitDrinks = (): Promise<TResponseDrinks> =>
-  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+  const response = fetch(URLS[path].res)
     .then(res => res.json())
-    .then((data: TResponseDrinks) => data);
+    .then((data: T) => data);
+
+  const categories = fetch(URLS[path].cat)
+    .then(res => res.json())
+    .then((data: C) => data);
+
+  return Promise.all([response, categories]);
+};

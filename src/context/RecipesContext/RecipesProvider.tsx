@@ -8,7 +8,9 @@ type RecipesProviderProps = { children: ReactNode | ReactNode[] };
 const RecipesProvider: FC<RecipesProviderProps> = ({ children }) => {
   const [foods, setFoods] = useState<TFoods[]>(() => [] as TFoods[]);
   const [drinks, setDrinks] = useState<TDrinks[]>(() => [] as TDrinks[]);
-  const [categories, setCategories] = useState<string[]>(() => [] as string[]);
+  const [categories, setCategories] = useState<{ strCategory: string }[]>(
+    () => [] as { strCategory: string }[],
+  );
 
   const value = useMemo(
     () => ({

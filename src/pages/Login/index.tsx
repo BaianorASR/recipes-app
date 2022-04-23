@@ -47,7 +47,7 @@ export const Login = () => {
           Email
           <input
             data-testid="email-input"
-            onChange={handleChange}
+            onInput={handleChange}
             value={user.email}
             type="email"
             id="email"

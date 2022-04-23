@@ -7,8 +7,8 @@ type TRecipesContext = {
   setFoods: (param: TFoods[]) => void;
   drinks: TDrinks[];
   setDrinks: (param: TDrinks[]) => void;
-  categories: string[];
-  setCategories: (param: string[]) => void;
+  categories: { strCategory: string }[];
+  setCategories: (param: { strCategory: string }[]) => void;
 };
 
 const RecipesContext = createContext<TRecipesContext>({} as TRecipesContext);

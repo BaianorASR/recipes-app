@@ -109,7 +109,10 @@ export type TDrinks = {
   dateModified: string;
 };
 
-// const T: 'meals' | 'drinks';
+export type TCategoryFoods = Record<'meals', { strCategory: string }[]>;
+export type TCategoryDrinks = Record<'drinks', { strCategory: string }[]>;
 
-// export type TRecipes<T = '/foods'> = T extends '/foods' ? TFoods : TDrinks;
+export type TResponseFoods = { meals: TFoods[] };
+export type TResponseDrinks = { drinks: TDrinks[] };
+
 export type TRecipes = { drinks: TDrinks[]; meals: TFoods[] };
