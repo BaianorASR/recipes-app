@@ -10,6 +10,6 @@ type ContainerProps = {
   children: ReactNode | ReactNode[];
 };
 
-export default function Container({ children }: ContainerProps) {
+export default function BaseContainer({ children }: ContainerProps) {
   return <SContainer>{children}</SContainer>;
 }

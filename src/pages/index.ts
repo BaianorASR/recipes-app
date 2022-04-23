@@ -1,4 +1,5 @@
-export * from './Login';
+export * from './Drinks';
+export * from './Drinks/id';
 export * from './Foods';
 export * from './Foods/id';
-export * from './Drinks/id';
+export * from './Login';

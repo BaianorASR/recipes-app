@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import Menu from '../../components/Menu';
 import MainContainer from '../../Container/Main';
 import { useRecipesContext } from '../../context/RecipesContext/RecipesProvider';
-import { InitFoods } from '../../services/api';
+import { InitDrinks } from '../../services/api';
 
-export const Foods = () => {
-  const { setFoods } = useRecipesContext();
+export const Drinks = () => {
+  const { setDrinks } = useRecipesContext();
 
   useEffect(() => {
-    InitFoods().then(response => setFoods(response.meals));
-  }, [setFoods]);
+    InitDrinks().then(response => setDrinks(response.drinks));
+  }, [setDrinks]);
 
   return (
     <MainContainer>

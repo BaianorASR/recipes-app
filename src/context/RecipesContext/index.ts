@@ -1,10 +1,14 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
+import { createContext } from 'react';
 
-import type { TRecipes } from '../../types/@types_api';
+import type { TDrinks, TFoods } from '../../types/@types_api';
 
 type TRecipesContext = {
-  recipes: TRecipes | [];
-  setRecipes: Dispatch<SetStateAction<TRecipes>>;
+  foods: TFoods[];
+  setFoods: (param: TFoods[]) => void;
+  drinks: TDrinks[];
+  setDrinks: (param: TDrinks[]) => void;
+  categories: string[];
+  setCategories: (param: string[]) => void;
 };
 
 const RecipesContext = createContext<TRecipesContext>({} as TRecipesContext);

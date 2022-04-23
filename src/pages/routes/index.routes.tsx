@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Foods, Login } from '..';
-import { DrinksID } from '../Drinks/id';
-import { FoodsID } from '../Foods/id';
+import { Drinks, DrinksID, Foods, FoodsID, Login } from '..';
 
 export default function AppRouter() {
   return (
@@ -10,7 +8,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/foods" element={<Foods />} />
-        <Route path="/drinks" element={<Foods />} />
+        <Route path="/drinks" element={<Drinks />} />
         <Route path="/foods/:id" element={<FoodsID />} />
         <Route path="/drinks/:id" element={<DrinksID />} />
         <Route path="/foods/:id/in-progress" element={<Foods />} />

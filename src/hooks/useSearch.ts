@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import { fetchApiResults, fetchApiResultsProps } from '../services/api';
+import { myAlert } from '../helpers';
+import { fetchApiResultsProps } from '../services/api';
+import { useFetch } from './useFetch';
 
 export const useSearch = () => {
   const { pathname } = useLocation() as { pathname: '/foods' | '/drinks' };
-  const navigate = useNavigate();
+
+  const { Drinks, Foods } = useFetch();
+
   const [data, setData] = useState<fetchApiResultsProps>({
     query: '',
     point: 'Name',
@@ -21,22 +25,15 @@ export const useSearch = () => {
   const onSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      fetchApiResults(data).then(res => {
-        const key = pathname === '/drinks' ? 'drinks' : 'meals';
-        console.log(res);
-        if (res[key].length === 1) {
-          navigate(`${pathname}/${res[key][0][key === 'drinks' ? 'idDrink' : 'idMeal']}`);
-        }
-      });
+      return pathname === '/drinks' ? Drinks(data, pathname) : Foods(data, pathname);
     },
-    [data, navigate, pathname],
+    [Drinks, Foods, data, pathname],
   );
 
   useEffect(() => {
     const { point, query } = data;
     if (point === 'First letter' && query.length > 1) {
-      const global = globalThis;
-      global.alert('Your search must have only 1 (one) character');
+      myAlert('Your search must have only 1 (one) character');
     }
   }, [data]);
 

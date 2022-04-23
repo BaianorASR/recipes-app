@@ -1,11 +1,12 @@
 import { FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import profileIcon from '../../assets/images/profileIcon.svg';
+import searchIcon from '../../assets/images/searchIcon.svg';
+import type { TPaths } from '../../constants/Header';
 import { EXCLUDE, PATHS } from '../../constants/Header';
 import { Search } from '../Search';
 import * as S from './styles';
-
-import type { TPaths } from '../../constants/Header';
 
 export const Header: FC = () => {
   const [toggleSearch, setToggleSearch] = useState(false);
@@ -14,10 +15,10 @@ export const Header: FC = () => {
 
   return (
     <div>
-      <header>
+      <S.Header>
         <S.Image
           data-testid="profile-top-btn"
-          src="src/images/profileIcon.svg"
+          src={profileIcon}
           alt="profile"
           onClick={() => navigate('/profile')}
         />
@@ -27,12 +28,12 @@ export const Header: FC = () => {
         ) && (
           <S.Image
             data-testid="search-top-btn"
-            src="src/images/searchIcon.svg"
+            src={searchIcon}
             alt="search"
             onClick={() => setToggleSearch(!toggleSearch)}
           />
         )}
-      </header>
+      </S.Header>
       <Search toggleSearch={toggleSearch} />
     </div>
   );

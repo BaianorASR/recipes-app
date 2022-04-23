@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Container from '../../Container';
+import BaseContainer from '../../Container/base';
 import { loginValidation } from '../../helpers/loginValidation';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
@@ -41,7 +41,7 @@ export const Login = () => {
   }, [user]);
 
   return (
-    <Container>
+    <BaseContainer>
       <form onSubmit={onSubmit}>
         <label htmlFor="email">
           Email
@@ -67,6 +67,6 @@ export const Login = () => {
           Entrar
         </button>
       </form>
-    </Container>
+    </BaseContainer>
   );
 };

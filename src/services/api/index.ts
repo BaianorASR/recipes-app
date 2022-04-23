@@ -1,4 +1,4 @@
-import { TRecipes } from '../../types/@types_api';
+import { TDrinks, TFoods } from '../../types/@types_api';
 
 export type fetchApiResultsProps = {
   query: string;
@@ -6,25 +6,45 @@ export type fetchApiResultsProps = {
   path: '/foods' | '/drinks';
 };
 
-export const fetchApiResults = ({
+type TResponseFoods = { meals: TFoods[] };
+type TResponseDrinks = { drinks: TDrinks[] };
+
+export function fetchFoods({
   query,
   point,
-  path,
-}: fetchApiResultsProps): Promise<TRecipes> => {
+}: fetchApiResultsProps): Promise<TResponseFoods> {
   const URLS = {
-    '/foods': {
-      Ingredient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`,
-      Name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
-      'First letter': `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`,
-    },
-    '/drinks': {
-      Ingredient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`,
-      Name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
-      'First letter': `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`,
-    },
+    Ingredient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`,
+    Name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
+    'First letter': `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`,
   };
 
-  return fetch(URLS[path][point])
+  return fetch(URLS[point])
     .then(res => res.json())
-    .then((data: TRecipes) => data);
-};
+    .then((data: TResponseFoods) => data);
+}
+
+export function fetchDrinks({
+  query,
+  point,
+}: fetchApiResultsProps): Promise<TResponseDrinks> {
+  const URLS = {
+    Ingredient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`,
+    Name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
+    'First letter': `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`,
+  };
+
+  return fetch(URLS[point])
+    .then(res => res.json())
+    .then((data: TResponseDrinks) => data);
+}
+
+export const InitFoods = (): Promise<TResponseFoods> =>
+  fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+    .then(res => res.json())
+    .then((data: TResponseFoods) => data);
+
+export const InitDrinks = (): Promise<TResponseDrinks> =>
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+    .then(res => res.json())
+    .then((data: TResponseDrinks) => data);
