@@ -12,7 +12,7 @@ export const useFilter = (path: '/foods' | '/drinks') => {
 
   const toggleFilter = useCallback(
     (value: string) => {
-      if (value === 'all') {
+      if (value === 'all' && filter !== 'all') {
         actual.current = 'all';
         setFilter('all');
         return;

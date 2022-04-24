@@ -1,3 +1,4 @@
+import { TAppPath } from '../../types';
 import type { TResponseDrinks, TResponseFoods } from '../../types/@types_api';
 
 export type fetchApiResultsProps = {
@@ -57,9 +58,7 @@ export function fetchDrinks({
     .then((data: TResponseDrinks) => data);
 }
 
-export const InitData = <T, C>(
-  path: '/foods' | '/drinks',
-): Promise<[Awaited<T>, Awaited<C>]> => {
+export const InitData = <T, C>(path: TAppPath): Promise<[Awaited<T>, Awaited<C>]> => {
   const URLS = {
     '/foods': {
       res: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
@@ -82,7 +81,7 @@ export const InitData = <T, C>(
   return Promise.all([response, categories]);
 };
 
-export const fetchCat = <T>(query: string, path: '/foods' | '/drinks') => {
+export const fetchCat = <T>(query: string, path: TAppPath) => {
   const URLS = {
     '/foods': `https://www.themealdb.com/api/json/v1/1/filter.php?c=${query}`,
     '/drinks': `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${query}`,

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Drinks, DrinksID, Foods, FoodsID, Login, Profile } from '..';
+import { Drinks, Foods, ID, Login, Profile } from '..';
 
 export default function AppRouter() {
   return (
@@ -9,8 +9,8 @@ export default function AppRouter() {
         <Route path="/" element={<Login />} />
         <Route path="/foods" element={<Foods />} />
         <Route path="/drinks" element={<Drinks />} />
-        <Route path="/foods/:id" element={<FoodsID />} />
-        <Route path="/drinks/:id" element={<DrinksID />} />
+        <Route path="/foods/:id" element={<ID />} />
+        <Route path="/drinks/:id" element={<ID />} />
         <Route path="/foods/:id/in-progress" element={<Foods />} />
         <Route path="/drinks/:id/in-progress" element={<Foods />} />
         <Route path="/explore" element={<Foods />} />

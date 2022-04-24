@@ -13,3 +13,4 @@ export type TPaths = {
 };
 
 export type TBasePath = { pathname: '/foods' | '/drinks' };
+export type TAppPath = '/foods' | '/drinks';
