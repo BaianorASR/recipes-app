@@ -112,6 +112,20 @@ export type TDrinks = {
 export type TCategoryFoods = Record<'meals', { strCategory: string }[]>;
 export type TCategoryDrinks = Record<'drinks', { strCategory: string }[]>;
 
+export type TCategoryFoodsResponse = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+}[];
+export type TFoodsCat = { meals: TCategoryFoodsResponse };
+
+export type TCategoryDrinksResponse = {
+  strDrink: string;
+  strDrinkThumb: string;
+  idDrink: string;
+}[];
+export type TDrinksCat = { drinks: TCategoryDrinksResponse };
+
 export type TResponseFoods = { meals: TFoods[] };
 export type TResponseDrinks = { drinks: TDrinks[] };
 

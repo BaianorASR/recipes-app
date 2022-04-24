@@ -1,14 +1,26 @@
 import { createContext } from 'react';
 
-import type { TDrinks, TFoods } from '../../types/@types_api';
+import type {
+  TCategoryDrinksResponse,
+  TCategoryFoodsResponse,
+  TDrinks,
+  TFoods,
+} from '../../types/@types_api';
+
+export type TCFoods = TFoods[] | TCategoryFoodsResponse;
+export type TCDrinks = TDrinks[] | TCategoryDrinksResponse;
+export type TCCategory = { strCategory: string }[];
+export type TCBackup = TCFoods | TCDrinks;
 
 type TRecipesContext = {
-  foods: TFoods[];
-  setFoods: (param: TFoods[]) => void;
-  drinks: TDrinks[];
-  setDrinks: (param: TDrinks[]) => void;
-  categories: { strCategory: string }[];
-  setCategories: (param: { strCategory: string }[]) => void;
+  foods: TCFoods;
+  setFoods: (param: TCFoods) => void;
+  drinks: TCDrinks;
+  setDrinks: (param: TCDrinks) => void;
+  categories: TCCategory;
+  setCategories: (param: TCCategory) => void;
+  backup: TCBackup;
+  setBackup: (param: TCBackup) => void;
 };
 
 const RecipesContext = createContext<TRecipesContext>({} as TRecipesContext);

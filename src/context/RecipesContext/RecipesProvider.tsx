@@ -1,16 +1,15 @@
 import { FC, ReactNode, useContext, useMemo, useState } from 'react';
 
-import type { TDrinks, TFoods } from '../../types/@types_api';
+import type { TCBackup, TCCategory, TCDrinks, TCFoods } from '.';
 import RecipesContext from '.';
 
 type RecipesProviderProps = { children: ReactNode | ReactNode[] };
 
 const RecipesProvider: FC<RecipesProviderProps> = ({ children }) => {
-  const [foods, setFoods] = useState<TFoods[]>(() => [] as TFoods[]);
-  const [drinks, setDrinks] = useState<TDrinks[]>(() => [] as TDrinks[]);
-  const [categories, setCategories] = useState<{ strCategory: string }[]>(
-    () => [] as { strCategory: string }[],
-  );
+  const [foods, setFoods] = useState<TCFoods>(() => [] as TCFoods);
+  const [drinks, setDrinks] = useState<TCDrinks>(() => [] as TCDrinks);
+  const [categories, setCategories] = useState<TCCategory>(() => [] as TCCategory);
+  const [backup, setBackup] = useState<TCBackup>(() => [] as TCBackup);
 
   const value = useMemo(
     () => ({
@@ -20,8 +19,10 @@ const RecipesProvider: FC<RecipesProviderProps> = ({ children }) => {
       setDrinks,
       categories,
       setCategories,
+      backup,
+      setBackup,
     }),
-    [categories, drinks, foods],
+    [backup, categories, drinks, foods],
   );
 
   return <RecipesContext.Provider value={value}>{children}</RecipesContext.Provider>;

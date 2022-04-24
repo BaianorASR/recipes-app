@@ -12,18 +12,7 @@ export const PATHS = {
   '/favorite-recipes': 'Favorite Recipes',
 };
 
-export type TPaths = {
-  pathname:
-    | '/foods'
-    | '/drinks'
-    | '/explore'
-    | '/explore/drinks'
-    | '/explore/foods/ingredients'
-    | '/explore/drinks/ingredients'
-    | '/explore/foods/nationalities'
-    | '/profile'
-    | '/done-recipes'
-    | '/favorite-recipes';
-};
-
 export const EXCLUDE = ['explore', 'done-recipes', 'favorite-recipes', 'profile'];
+
+export const MAX_CATEGORY_LENGTH = 5;
+export const MAX_RECIPES_TO_SHOW = 12;

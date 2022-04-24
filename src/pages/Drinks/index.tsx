@@ -8,15 +8,16 @@ import { InitData } from '../../services/api';
 import type { TCategoryDrinks, TResponseDrinks } from '../../types/@types_api';
 
 export const Drinks = () => {
-  const { setDrinks, setCategories } = useRecipesContext();
+  const { setDrinks, setCategories, setBackup } = useRecipesContext();
   const { pathname } = useLocation() as { pathname: '/drinks' };
 
   useEffect(() => {
     InitData<TResponseDrinks, TCategoryDrinks>(pathname).then(([res, cat]) => {
       setDrinks(res.drinks);
+      setBackup(res.drinks);
       setCategories(cat.drinks);
     });
-  }, [pathname, setCategories, setDrinks]);
+  }, [pathname, setBackup, setCategories, setDrinks]);
 
   return (
     <MainContainer>

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Drinks, DrinksID, Foods, FoodsID, Login } from '..';
+import { Drinks, DrinksID, Foods, FoodsID, Login, Profile } from '..';
 
 export default function AppRouter() {
   return (
@@ -19,7 +19,7 @@ export default function AppRouter() {
         <Route path="/explore/foods/ingredients" element={<Foods />} />
         <Route path="/explore/drinks/ingredients" element={<Foods />} />
         <Route path="/explore/foods/nationalities" element={<Foods />} />
-        <Route path="/profile" element={<Foods />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/done-recipes" element={<Foods />} />
         <Route path="/favorite-recipes" element={<Foods />} />
       </Routes>

@@ -8,6 +8,25 @@ export type fetchApiResultsProps = {
 
 export type TResponseCategories = Record<'meals' | 'drinks', { strCategory: string }>;
 
+// export const fetchAPI = <T>({ path, query, point }: fetchApiResultsProps) => {
+//   const URLS = {
+//     '/foods': {
+//       Ingredient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`,
+//       Name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`,
+//       'First letter': `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`,
+//     },
+//     '/drinks': {
+//       Ingredient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`,
+//       Name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`,
+//       'First letter': `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`,
+//     },
+//   };
+
+//   return fetch(URLS[path][point])
+//     .then(res => res.json())
+//     .then((data: T) => data);
+// };
+
 export function fetchFoods({
   query,
   point,
@@ -48,7 +67,7 @@ export const InitData = <T, C>(
     },
     '/drinks': {
       res: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      cat: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+      cat: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
     },
   };
 
@@ -61,4 +80,14 @@ export const InitData = <T, C>(
     .then((data: C) => data);
 
   return Promise.all([response, categories]);
+};
+
+export const fetchCat = <T>(query: string, path: '/foods' | '/drinks') => {
+  const URLS = {
+    '/foods': `https://www.themealdb.com/api/json/v1/1/filter.php?c=${query}`,
+    '/drinks': `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${query}`,
+  };
+  return fetch(URLS[path])
+    .then(res => res.json())
+    .then((data: T) => data);
 };

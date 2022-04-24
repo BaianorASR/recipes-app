@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import profileIcon from '../../assets/images/profileIcon.svg';
 import searchIcon from '../../assets/images/searchIcon.svg';
-import type { TPaths } from '../../constants/Header';
-import { EXCLUDE, PATHS } from '../../constants/Header';
+import { EXCLUDE, PATHS } from '../../constants';
+import type { TPaths } from '../../types';
 import { Search } from '../Search';
 import * as S from './styles';
 
