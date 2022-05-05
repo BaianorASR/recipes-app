@@ -1,32 +1,33 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import { fetchID } from '../services/api';
 import { TDrinks, TFoods } from '../types/@types_api';
 
 export const useFetchID = (isFood: boolean, ID: string) => {
   const [foods, setFoods] = useState<TFoods>();
   const [drinks, setDrinks] = useState<TDrinks>();
+  const [recommendation, setRecommendation] = useState<TFoods[] | TDrinks[]>();
   const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const URLS = {
-      '/foods': `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ID}`,
-      '/drinks': `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ID}`,
-    };
-    fetch(URLS[isFood ? '/foods' : '/drinks'])
-      .then(res => res.json())
-      .then(data => {
-        if (isFood) setFoods(data.meals[0] as TFoods);
-        else setDrinks(data.drinks[0] as TDrinks);
-        return setLoading(false);
-      });
+    fetchID(isFood, ID).then(([response, reco]) => {
+      (isFood ? setFoods : setDrinks)(response[isFood ? 'meals' : 'drinks'][0]);
+      setRecommendation(Object.values(reco)[0] as TFoods[] | TDrinks[]);
+      setLoading(false);
+    });
   }, [ID, isFood]);
 
   return useMemo(
     () => ({
       foods,
       drinks,
+      recommendation,
       isLoading,
     }),
-    [drinks, foods, isLoading],
+    [drinks, foods, isLoading, recommendation],
   );
 };
+
+// if (isFood) setFoods(data.meals[0] as TFoods);
+// else setDrinks(data.drinks[0] as TDrinks);
+// return setLoading(false);

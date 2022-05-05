@@ -10,7 +10,12 @@ export const InfoDrinks: FC<InfoDrinksProps> = ({ drinks }) => {
   return (
     <div>
       <div>
-        <img data-testid="recipe-photo" src={drinks?.strDrinkThumb} alt="thumb" />
+        <img
+          data-testid="recipe-photo"
+          src={drinks?.strDrinkThumb}
+          alt="thumb"
+          width={300}
+        />
         <p data-testid="recipe-title">{drinks?.strDrink}</p>
         <button data-testid="share-btn" type="button">
           share

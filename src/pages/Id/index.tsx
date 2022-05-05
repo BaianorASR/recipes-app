@@ -10,7 +10,7 @@ export const ID = () => {
   const { pathname } = useLocation() as TBasePath;
   const isFood = pathname.includes('/foods');
   const { id } = useParams() as { id: string };
-  const { drinks, foods, isLoading } = useFetchID(isFood, id);
+  const { drinks, foods, isLoading, recommendation } = useFetchID(isFood, id);
   if (isLoading) return <p>loading...</p>;
 
   if (drinks) return <InfoDrinks drinks={drinks} />;
@@ -19,7 +19,12 @@ export const ID = () => {
   return (
     <div>
       <div>
-        <img data-testid="recipe-photo" src={foods?.strMealThumb} alt="thumb" />
+        <img
+          data-testid="recipe-photo"
+          src={foods?.strMealThumb}
+          alt="thumb"
+          width={300}
+        />
         <p data-testid="recipe-title">{foods?.strMeal}</p>
         <button data-testid="share-btn" type="button">
           share
@@ -47,7 +52,13 @@ export const ID = () => {
           allowFullScreen
           title="Embedded youtube"
         />
-        <div data-testid={`${0}-recomendation-card`}>recommendation</div>
+        <div data-testid={`${0}-recomendation-card`}>
+          {recommendation?.slice(0, 6).map((each, i) => (
+            <div key={i}>
+              <div>{each[isFood ? 'idMeal' : 'idDrink']}</div>
+            </div>
+          ))}
+        </div>
         <button data-testid="start-recipe-btn" type="button">
           start
         </button>

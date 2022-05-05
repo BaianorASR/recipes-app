@@ -90,3 +90,25 @@ export const fetchCat = <T>(query: string, path: TAppPath) => {
     .then(res => res.json())
     .then((data: T) => data);
 };
+
+export const fetchID = (isFood: boolean, ID: string) => {
+  const URLS = {
+    '/foods': {
+      res: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ID}`,
+      rec: 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+    },
+    '/drinks': {
+      res: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ID}`,
+      rec: 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+    },
+  };
+  const response = fetch(URLS[isFood ? '/foods' : '/drinks'].res)
+    .then(res => res.json())
+    .then(data => data);
+
+  const recommendation = fetch(URLS[isFood ? '/foods' : '/drinks'].rec)
+    .then(res => res.json())
+    .then(data => data);
+
+  return Promise.all([response, recommendation]);
+};
